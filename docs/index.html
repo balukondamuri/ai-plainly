@@ -477,6 +477,87 @@ details.built p{margin:0 0 10px;font-size:15px}
 .notice{font-size:14px;color:var(--muted);background:var(--surface);border-left:3px solid var(--accent);padding:10px 14px;margin:16px 0 0;max-width:760px}
 @media (prefers-reduced-motion:no-preference){.view{animation:in .25s ease-out}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
 
+
+/* ---------- Quick recap ---------- */
+.hdrbtns{display:flex;align-items:center;gap:10px}
+header.top .tag{margin-left:auto}
+.recapbtn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:15px;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:8px 16px 8px 10px;min-height:40px;cursor:pointer;box-shadow:0 10px 24px -16px var(--accent)}
+.recapbtn:hover{filter:brightness(1.08)}
+.recapbtn svg{flex:none}
+@media (max-width:820px){.recapbtn{padding:7px 12px 7px 9px}.recapbtn .rl{display:none}.recapbtn .rs{display:inline}}
+.recapbtn .rs{display:none}
+.qrecap{position:fixed;inset:0;z-index:100;background:var(--surface);color:var(--ink);overflow-y:auto;overscroll-behavior:contain}
+.qrecap[hidden]{display:none}
+.rc-wrap{max-width:1400px;margin:0 auto;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:16px;min-height:100%;box-sizing:border-box}
+.rc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.rc-eyebrow{margin:0;font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.rc-head h2{margin:4px 0 4px;font-family:var(--f-display);font-weight:800;font-size:clamp(26px,3.4vw,40px);letter-spacing:-.02em;line-height:1.1}
+.rc-sub{margin:0;color:var(--muted);font-size:16px}
+.rc-x{flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.rc-x:hover{background:var(--bg)}
+.rc-stage{width:100%}
+.rc-svg{display:block;width:100%;height:auto;max-height:62vh}
+.rc-band{background:var(--accent-soft);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.rc-say{margin:0;flex:1 1 420px;font-size:clamp(17px,1.6vw,21px);font-weight:700;line-height:1.4;min-height:2.8em;display:flex;align-items:center}
+.rc-ctrl{display:flex;align-items:center;gap:8px;flex:none}
+.rc-ctrl button{font:inherit;font-size:15px;font-weight:700;min-height:44px;min-width:44px;border-radius:999px;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);cursor:pointer;padding:0 14px}
+.rc-ctrl button.rc-play{background:var(--ink);color:var(--bg);border-color:var(--ink);min-width:92px}
+.rc-dots{display:flex;gap:6px;width:100%;justify-content:center}
+.rc-dots button{width:26px;height:6px;border-radius:3px;border:0;padding:0;background:var(--line);cursor:pointer}
+.rc-dots button[aria-current="step"]{background:var(--accent)}
+.rc-foot{margin:0;color:var(--muted);font-size:14px}
+body.recap-open{overflow:hidden}
+@media (max-width:700px){
+  .rc-wrap{gap:12px;padding-top:max(14px,env(safe-area-inset-top,0px))}
+  .rc-head h2{font-size:24px}
+  .rc-sub,.rc-foot{display:none}
+  .rc-x{width:44px;height:44px}
+  .rc-svg{max-height:48vh}
+  .rc-band{padding:14px;gap:12px}
+  .rc-say{flex-basis:100%;font-size:16.5px;min-height:4.2em}
+  .rc-ctrl{width:100%;justify-content:space-between}
+  .rc-ctrl button.rc-play{flex:1}
+}
+/* drawing */
+.rc-svg text{font-family:var(--f-body)}
+.rc-svg .mono{font-family:var(--f-mono)}
+.rf-s{fill:var(--surface)}.rf-t{fill:var(--ticket)}.rf-a{fill:var(--accent)}.rf-as{fill:var(--accent-soft)}.rf-w{fill:var(--warm)}.rf-g{fill:var(--good)}.rf-k{fill:var(--skin)}.rf-n{fill:none}
+.rs-i{stroke:var(--ink)}.rs-l{stroke:var(--line)}.rs-a{stroke:var(--accent)}.rs-m{stroke:var(--muted)}.rs-t{stroke:var(--ticket-line)}
+.rt-i{fill:var(--ink)}.rt-m{fill:var(--muted)}.rt-a{fill:var(--accent)}.rt-on{fill:var(--accent-ink)}
+.rc-card{fill:var(--surface);stroke:var(--line);stroke-width:1.5;transition:stroke .3s,stroke-width .3s}
+.rc-grp{transition:opacity .35s}
+.qrecap[data-step] .rc-grp{opacity:.4}
+.qrecap[data-step="you"] .g-you,.qrecap[data-step="p"] .g-p,.qrecap[data-step="c"] .g-c,.qrecap[data-step="l"] .g-l,.qrecap[data-step="e"] .g-e,.qrecap[data-step="t"] .g-t,.qrecap[data-step="a"] .g-a{opacity:1}
+.qrecap[data-step="you"] .g-you .rc-card,.qrecap[data-step="p"] .g-p .rc-card,.qrecap[data-step="c"] .g-c .rc-card,.qrecap[data-step="l"] .g-l .rc-card,.qrecap[data-step="e"] .g-e .rc-card,.qrecap[data-step="t"] .g-t .rc-card{stroke:var(--accent);stroke-width:3}
+.qrecap[data-step="a"] .g-a .rc-card{stroke:var(--good);stroke-width:3}
+.rc-harness{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:8 6;opacity:.45;transition:opacity .3s}
+.qrecap[data-step="l"] .rc-harness,.qrecap[data-step="e"] .rc-harness{opacity:1}
+.rc-flow{stroke-dasharray:5 4}
+.rc-chip{fill:var(--surface);stroke:var(--accent);stroke-width:1.3}
+.rc-tool{fill:var(--surface);stroke:var(--ink);stroke-width:1.3}
+.rc-pt{opacity:0}.rc-pt.p4{opacity:1}.rc-pl{fill:var(--muted)}.rc-pl.p4{fill:var(--ink);font-weight:700}
+.qrecap[data-step="t"] .rc-pt{opacity:0;animation:rcShow 5.4s linear}.qrecap[data-step="t"] .rc-pl{fill:var(--muted);font-weight:400;animation:rcPick 5.4s linear}
+@keyframes rcShow{0%,19.5%{opacity:1}20%,100%{opacity:0}}@keyframes rcPick{0%,19.5%{fill:var(--accent);font-weight:700}20%,100%{fill:var(--muted);font-weight:400}}
+@media (prefers-reduced-motion:reduce){.qrecap[data-step="t"] .rc-pt{animation:none}.qrecap[data-step="t"] .rc-pt.p4{opacity:1}.qrecap[data-step="t"] .rc-pl{animation:none}}
+.rc-page{opacity:0}
+.qrecap[data-step="l"] .rc-page,.qrecap[data-step="e"] .rc-page,.qrecap[data-step="t"] .rc-page,.qrecap[data-step="a"] .rc-page{opacity:1}
+.rc-row{opacity:.45}
+@media (prefers-reduced-motion:no-preference){
+  .qrecap .rc-flow{animation:rcDash .8s linear infinite}
+  @keyframes rcDash{from{stroke-dashoffset:9}to{stroke-dashoffset:0}}
+  .qrecap[data-step="p"] .rc-chip,.qrecap[data-step="l"] .rc-tool,.qrecap[data-step="t"] .rc-tool{animation:rcLit .35s both}
+  @keyframes rcLit{to{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.2}}
+  .qrecap[data-step="c"] .rc-page{animation:rcFly .9s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rcFly{from{opacity:0;transform:translate(var(--fx),96px)}to{opacity:1;transform:none}}
+  .qrecap[data-step="e"] .rc-row{animation:rcOn .35s both}
+  @keyframes rcOn{to{opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){
+  .qrecap[data-step="p"] .rc-chip,.qrecap[data-step="l"] .rc-tool,.qrecap[data-step="t"] .rc-tool{fill:var(--accent-soft);stroke-width:2.2}
+  .qrecap[data-step="c"] .rc-page{opacity:1}
+  .qrecap[data-step="e"] .rc-row{opacity:1}
+}
+
 /* ---------- Phone layout ---------- */
 .menubtn{display:none}
 @media (max-width:820px){
@@ -521,7 +602,10 @@ details.built p{margin:0 0 10px;font-size:15px}
   <header class="top">
     <div class="brand">AI<span>,</span> Plainly</div>
     <div class="tag">AI concepts explained through everyday life</div>
-    <button class="menubtn" type="button" id="menuBtn" aria-expanded="false" aria-controls="courseMap"><span class="bars" aria-hidden="true"></span>Menu</button>
+    <div class="hdrbtns">
+      <button class="recapbtn" type="button" id="recapBtn" aria-haspopup="dialog"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 7 L15 11 L9 15 Z" fill="currentColor"/></svg><span class="rl">Quick recap</span><span class="rs">Recap</span></button>
+      <button class="menubtn" type="button" id="menuBtn" aria-expanded="false" aria-controls="courseMap"><span class="bars" aria-hidden="true"></span>Menu</button>
+    </div>
   </header>
 
   <div class="layout">
@@ -540,6 +624,22 @@ details.built p{margin:0 0 10px;font-size:15px}
     </nav>
     <main id="main" tabindex="-1"></main>
   </div>
+</div>
+
+<div class="qrecap" id="recap" role="dialog" aria-modal="true" aria-labelledby="rcTitle" hidden>
+ <div class="rc-wrap">
+  <div class="rc-head">
+   <div><p class="rc-eyebrow">Quick recap</p><h2 id="rcTitle">The whole AI process, in one picture</h2><p class="rc-sub">Follow one request through everything you’ve learned. Each step lights up and is explained below.</p></div>
+   <button class="rc-x" type="button" id="rcClose" aria-label="Close the recap"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3 L15 15 M15 3 L3 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="rc-stage" id="rcStage"></div>
+  <div class="rc-band">
+   <p class="rc-say" id="rcSay" aria-live="polite"></p>
+   <div class="rc-ctrl"><button type="button" id="rcPrev" aria-label="Previous step">‹</button><button type="button" class="rc-play" id="rcPlay">Pause</button><button type="button" id="rcNext" aria-label="Next step">›</button></div>
+   <div class="rc-dots" id="rcDots"></div>
+  </div>
+  <p class="rc-foot">Loops every 15 seconds. Press Esc or X to go back to your lesson.</p>
+ </div>
 </div>
 
 <script>
@@ -3637,6 +3737,114 @@ function renderWhich(){
 }
 
 /* ---------- router ---------- */
+
+/* ---------- Quick recap ---------- */
+const RC_STEPS=[
+ {k:"you",box:[0,120],ms:1000,say:"You ask: “When is the water bill due? Remind me before then.”"},
+ {k:"p",box:[150,200],ms:1800,say:"Step 1 · Prompt. Your message plus the system prompt become one prompt, counted in tokens."},
+ {k:"c",box:[380,230],ms:2000,say:"Step 2 · Context + RAG. The AI only sees its context window, so RAG finds your water bill and adds it."},
+ {k:"l",box:[644,176],ms:2200,say:"Step 3 · Agent loop. The AI asks for the “remind” tool; the harness runs it and sends back “saved”."},
+ {k:"e",box:[836,154],ms:1600,say:"Step 4 · Extend it. CLAUDE.md rules, skills and hooks shape and guard every step, like “never pay without asking”."},
+ {k:"t",box:[1024,292],ms:5400,say:"Step 5 · Teams + orchestration. Bigger jobs use several calls or subagents, arranged in one of five patterns. All five are workflows: the path is set in code."},
+ {k:"a",box:[1336,104],ms:1000,say:"Done · The answer comes back to you: “Due Nov 20. Reminder set for Nov 17.” with the bill as its source."}
+];
+const RC_SVG=`<svg class="rc-svg" id="rcSvg" viewBox="0 52 1440 388" role="img" aria-label="The whole AI process: you ask; your message and the system prompt become the prompt; the AI sees its context window and RAG adds pages from your documents; inside the harness the AI requests tools and gets results in a loop, shaped by CLAUDE.md, skills and hooks; bigger jobs use several calls or subagents arranged in one of five orchestration patterns: prompt chaining, routing, parallelization, orchestrator-workers and evaluator-optimizer; the answer comes back to you.">
+<defs><marker id="rcA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="rt-m"/></marker><marker id="rcB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="rt-a"/></marker></defs>
+<rect class="rc-harness" x="626" y="74" width="374" height="342" rx="16"/>
+<rect class="rf-s rs-a" x="743" y="62" width="140" height="24" rx="12" stroke-width="1.5"/><text class="mono rt-a" x="813" y="78" font-size="12" font-weight="600" text-anchor="middle">THE HARNESS</text>
+<g class="rf-n rs-m" stroke-width="2"><path class="rc-flow" d="M122 250 H146" marker-end="url(#rcA)"/><path class="rc-flow" d="M352 250 H376" marker-end="url(#rcA)"/><path class="rc-flow" d="M612 250 H640" marker-end="url(#rcA)"/><path d="M822 250 H832" marker-end="url(#rcA)"/><path class="rc-flow" d="M992 250 H1020" marker-end="url(#rcA)"/><path d="M1318 250 H1332" marker-end="url(#rcA)"/></g>
+<path class="rc-flow rf-n rs-a" d="M1388 402 V430 H60 V404" stroke-width="2" marker-end="url(#rcB)"/>
+<text class="mono rt-a" x="1170" y="424" font-size="13" text-anchor="middle">the answer comes back to you</text>
+<g class="rc-grp g-you"><rect class="rc-card" x="0" y="100" width="120" height="300" rx="14"/><circle class="rf-k rs-i" cx="60" cy="200" r="18" stroke-width="2"/><path class="rf-s rs-i" d="M28 268 Q60 220 92 268 Z" stroke-width="2"/><text class="rt-i" x="60" y="304" font-size="18" font-weight="700" text-anchor="middle">You</text><text class="rt-m" x="60" y="326" font-size="13" text-anchor="middle">ask a question</text></g>
+<g class="rc-grp g-p"><rect class="rc-card" x="150" y="100" width="200" height="300" rx="14"/><circle class="rf-a" cx="178" cy="130" r="16"/><text class="rt-on" x="178" y="136" font-size="15" font-weight="700" text-anchor="middle">1</text><text class="rt-i" x="202" y="136" font-size="18" font-weight="700">Prompt</text>
+ <rect class="rf-t rs-i" x="170" y="160" width="160" height="112" rx="8" stroke-width="1.5"/><text class="rt-i" x="182" y="184" font-size="14" font-weight="700">System prompt</text><text class="rt-i" x="182" y="203" font-size="12.5">Be brief. Cite sources.</text><path class="rs-t" d="M182 215 H318" stroke-width="1.5"/><text class="rt-i" x="182" y="236" font-size="14" font-weight="700">Your message</text><text class="rt-i" x="182" y="255" font-size="12.5">Water bill due date?</text>
+ <rect class="rc-chip" x="170" y="288" width="46" height="24" rx="6"/><text class="rt-i" x="193" y="305" font-size="12" text-anchor="middle">Water</text>
+ <rect class="rc-chip" style="animation-delay:.35s" x="220" y="288" width="34" height="24" rx="6"/><text class="rt-i" x="237" y="305" font-size="12" text-anchor="middle">bill</text>
+ <rect class="rc-chip" style="animation-delay:.7s" x="258" y="288" width="34" height="24" rx="6"/><text class="rt-i" x="275" y="305" font-size="12" text-anchor="middle">due</text>
+ <rect class="rc-chip" style="animation-delay:1.05s" x="296" y="288" width="44" height="24" rx="6"/><text class="rt-i" x="318" y="305" font-size="12" text-anchor="middle">date?</text>
+ <text class="mono rt-a" x="250" y="342" font-size="11" text-anchor="middle">4 tokens</text><text class="rt-m" x="250" y="370" font-size="13.5" text-anchor="middle">Your instructions + request,</text><text class="rt-m" x="250" y="389" font-size="13.5" text-anchor="middle">measured in tokens</text></g>
+<g class="rc-grp g-c"><rect class="rc-card" x="380" y="100" width="230" height="300" rx="14"/><circle class="rf-a" cx="408" cy="130" r="16"/><text class="rt-on" x="408" y="136" font-size="15" font-weight="700" text-anchor="middle">2</text><text class="rt-i" x="432" y="136" font-size="18" font-weight="700">Context + RAG</text>
+ <rect class="rf-s rs-a" x="396" y="158" width="198" height="104" rx="10" stroke-width="1.8" stroke-dasharray="6 4"/><text class="mono rt-a" x="406" y="176" font-size="11.5">context window</text>
+ <rect class="rf-t rs-i" x="406" y="190" width="70" height="56" rx="5" stroke-width="1.3"/><path class="rs-i" d="M414 204 H468 M414 214 H460 M414 228 H468 M414 238 H452" stroke-width="1.2"/>
+ <g class="rc-page" style="--fx:-74px"><rect class="rf-s rs-i" x="490" y="190" width="42" height="56" rx="4" stroke-width="1.3"/><text class="mono rt-a" x="511" y="206" font-size="8.5" text-anchor="middle">BILL</text><path class="rs-l" d="M497 216 H525 M497 226 H525 M497 236 H517" stroke-width="2.4"/></g>
+ <g class="rc-page" style="--fx:-126px;animation-delay:.45s"><rect class="rf-s rs-i" x="542" y="190" width="42" height="56" rx="4" stroke-width="1.3"/><path class="rs-l" d="M549 204 H577 M549 214 H577 M549 224 H569" stroke-width="2.4"/></g>
+ <rect class="rf-s rs-i" x="404" y="296" width="44" height="52" rx="4" stroke-width="1.5"/><rect class="rf-s rs-i" x="410" y="290" width="44" height="52" rx="4" stroke-width="1.5"/><rect class="rf-s rs-i" x="416" y="284" width="44" height="52" rx="4" stroke-width="1.5"/><path class="rs-l" d="M423 298 H453 M423 308 H453 M423 318 H445" stroke-width="2.4"/>
+ <circle class="rf-s rs-i" cx="494" cy="312" r="13" stroke-width="2"/><path class="rs-i" d="M503 321 L514 332" stroke-width="2.6" stroke-linecap="round"/><text class="rt-m" x="536" y="316" font-size="12">your docs</text>
+ <text class="rt-m" x="495" y="370" font-size="13.5" text-anchor="middle">It sees only its window;</text><text class="rt-m" x="495" y="389" font-size="13.5" text-anchor="middle">RAG adds the right pages</text></g>
+<g class="rc-grp g-l"><rect class="rc-card" x="644" y="100" width="176" height="300" rx="14"/><circle class="rf-a" cx="672" cy="130" r="16"/><text class="rt-on" x="672" y="136" font-size="15" font-weight="700" text-anchor="middle">3</text><text class="rt-i" x="696" y="136" font-size="18" font-weight="700">Agent loop</text>
+ <rect class="rf-s rs-i" x="692" y="164" width="80" height="58" rx="12" stroke-width="2.2"/><text class="rt-i" x="732" y="200" font-size="18" font-weight="700" text-anchor="middle">LLM</text>
+ <path class="rc-flow rf-n rs-a" d="M712 226 V274" stroke-width="2" marker-end="url(#rcB)"/><path class="rc-flow rf-n rs-a" d="M752 274 V226" stroke-width="2" marker-end="url(#rcB)"/>
+ <text class="mono rt-m" x="706" y="254" font-size="11.5" text-anchor="end">request</text><text class="mono rt-m" x="758" y="254" font-size="11.5">result</text>
+ <rect class="rc-tool" x="652" y="280" width="50" height="28" rx="6"/><text class="rt-i" x="677" y="299" font-size="12" text-anchor="middle">search</text>
+ <rect class="rc-tool" style="animation-delay:.8s" x="707" y="280" width="50" height="28" rx="6"/><text class="rt-i" x="732" y="299" font-size="12" text-anchor="middle">files</text>
+ <rect class="rc-tool" style="animation-delay:1.6s" x="762" y="280" width="50" height="28" rx="6"/><text class="rt-i" x="787" y="299" font-size="12" text-anchor="middle">remind</text>
+ <text class="mono rt-a" x="732" y="336" font-size="11" text-anchor="middle">tools</text><text class="rt-m" x="732" y="370" font-size="13.5" text-anchor="middle">Request, tool, result,</text><text class="rt-m" x="732" y="389" font-size="13.5" text-anchor="middle">repeat until done</text></g>
+<g class="rc-grp g-e"><rect class="rc-card" x="836" y="100" width="154" height="300" rx="14"/><circle class="rf-a" cx="864" cy="130" r="16"/><text class="rt-on" x="864" y="136" font-size="15" font-weight="700" text-anchor="middle">4</text><text class="rt-i" x="888" y="136" font-size="18" font-weight="700">Extend it</text>
+ <g class="rc-row"><rect class="rf-t rs-i" x="852" y="164" width="26" height="32" rx="3" stroke-width="1.5"/><path class="rs-i" d="M857 174 H873 M857 181 H873 M857 188 H867" stroke-width="1.2"/><text class="rt-i" x="888" y="178" font-size="14" font-weight="700">CLAUDE.md</text><text class="rt-m" x="888" y="195" font-size="12">rules it reads</text></g>
+ <g class="rc-row" style="animation-delay:.5s"><rect class="rf-as rs-i" x="852" y="222" width="26" height="32" rx="3" stroke-width="1.5"/><path class="rs-i" d="M858 222 V254" stroke-width="1.5"/><path class="rs-a" d="M862 232 H874 M862 240 H874" stroke-width="1.5"/><text class="rt-i" x="888" y="236" font-size="14" font-weight="700">Skills</text><text class="rt-m" x="888" y="253" font-size="12">recipes it loads</text></g>
+ <g class="rc-row" style="animation-delay:1s"><path class="rf-n rs-i" d="M858 290 V284 a7 7 0 0 1 14 0 V290" stroke-width="2"/><rect class="rf-w rs-i" x="852" y="290" width="26" height="22" rx="4" stroke-width="1.5"/><circle class="rt-i" cx="865" cy="300" r="2.4"/><text class="rt-i" x="888" y="296" font-size="14" font-weight="700">Hooks</text><text class="rt-m" x="888" y="313" font-size="12">always enforced</text></g>
+ <text class="rt-m" x="913" y="370" font-size="13.5" text-anchor="middle">Shape and guard</text><text class="rt-m" x="913" y="389" font-size="13.5" text-anchor="middle">every step</text></g>
+<g class="rc-grp g-t"><rect class="rc-card" x="1024" y="100" width="292" height="300" rx="14"/><circle class="rf-a" cx="1052" cy="130" r="16"/><text class="rt-on" x="1052" y="136" font-size="15" font-weight="700" text-anchor="middle">5</text><text class="rt-i" x="1076" y="136" font-size="18" font-weight="700">Teams + orchestration</text><rect class="rf-n rs-l" x="1036" y="152" width="268" height="114" rx="10" stroke-width="1.2"/><g class="rc-pt p1" style="animation-delay:0.00s"><text class="rt-a" x="1170" y="170" font-size="15" font-weight="700" text-anchor="middle">Prompt chaining</text><rect class="rf-s rs-i" x="1054" y="192" width="52" height="22" rx="5" stroke-width="1.3"/><text class="rt-i" x="1080" y="206.8" font-size="10.5" text-anchor="middle">step 1</text><path class="rf-n rs-m" d="M1108 203 H1130" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-as rs-a" d="M1142 193 L1152 203 L1142 213 L1132 203 Z" stroke-width="1.3"/><path class="rf-n rs-m" d="M1154 203 H1170" stroke-width="1.4" marker-end="url(#rcA)"/><rect class="rf-s rs-i" x="1172" y="192" width="52" height="22" rx="5" stroke-width="1.3"/><text class="rt-i" x="1198" y="206.8" font-size="10.5" text-anchor="middle">step 2</text><path class="rf-n rs-m" d="M1226 203 H1232" stroke-width="1.4" marker-end="url(#rcA)"/><rect class="rf-s rs-i" x="1234" y="192" width="52" height="22" rx="5" stroke-width="1.3"/><text class="rt-i" x="1260" y="206.8" font-size="10.5" text-anchor="middle">step 3</text><text class="rt-m" x="1170" y="256" font-size="12" text-anchor="middle">fixed steps in order, with a check</text></g><g class="rc-pt p2" style="animation-delay:1.08s"><text class="rt-a" x="1170" y="170" font-size="15" font-weight="700" text-anchor="middle">Routing</text><rect class="rf-as rs-a" x="1054" y="192" width="56" height="22" rx="5" stroke-width="1.3"/><text class="rt-i" x="1082" y="206.8" font-size="10.5" text-anchor="middle">sort</text><path class="rf-n rs-m" d="M1112 200 L1188 188" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-n rs-m" d="M1112 203 H1188" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-n rs-m" d="M1112 206 L1188 220" stroke-width="1.4" marker-end="url(#rcA)"/><rect class="rf-s rs-i" x="1190" y="178" width="92" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="190.6" font-size="10" text-anchor="middle">bills</text><rect class="rf-s rs-i" x="1190" y="198" width="92" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="210.6" font-size="10" text-anchor="middle">school</text><rect class="rf-s rs-i" x="1190" y="218" width="92" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="230.6" font-size="10" text-anchor="middle">house</text><text class="rt-m" x="1170" y="256" font-size="12" text-anchor="middle">sort first, then a specialist</text></g><g class="rc-pt p3" style="animation-delay:2.16s"><text class="rt-a" x="1170" y="170" font-size="15" font-weight="700" text-anchor="middle">Parallelization</text><rect class="rf-s rs-i" x="1054" y="178" width="70" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1089" y="190.6" font-size="10" text-anchor="middle">call 1</text><rect class="rf-s rs-i" x="1054" y="198" width="70" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1089" y="210.6" font-size="10" text-anchor="middle">call 2</text><rect class="rf-s rs-i" x="1054" y="218" width="70" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1089" y="230.6" font-size="10" text-anchor="middle">call 3</text><path class="rf-n rs-m" d="M1126 187 L1200 200" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-n rs-m" d="M1126 207 H1200" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-n rs-m" d="M1126 227 L1200 214" stroke-width="1.4" marker-end="url(#rcA)"/><rect class="rf-as rs-a" x="1202" y="196" width="84" height="22" rx="5" stroke-width="1.3"/><text class="rt-i" x="1244" y="210.8" font-size="10.5" text-anchor="middle">combine</text><text class="rt-m" x="1170" y="256" font-size="12" text-anchor="middle">run at once, then combine</text></g><g class="rc-pt p4" style="animation-delay:3.24s"><text class="rt-a" x="1170" y="170" font-size="15" font-weight="700" text-anchor="middle">Orchestrator-workers</text><rect class="rf-as rs-a" x="1054" y="192" width="60" height="22" rx="5" stroke-width="1.3"/><text class="rt-i" x="1084" y="206.8" font-size="10.5" text-anchor="middle">lead</text><path class="rf-n rs-m" d="M1116 200 L1188 188" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-n rs-m" d="M1116 203 H1188" stroke-width="1.4" marker-end="url(#rcA)"/><path class="rf-n rs-m" d="M1116 206 L1188 220" stroke-width="1.4" marker-end="url(#rcA)"/><rect class="rf-s rs-i" x="1190" y="178" width="92" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="190.6" font-size="10" text-anchor="middle">subagent</text><rect class="rf-s rs-i" x="1190" y="198" width="92" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="210.6" font-size="10" text-anchor="middle">subagent</text><rect class="rf-s rs-i" x="1190" y="218" width="92" height="18" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="230.6" font-size="10" text-anchor="middle">subagent</text><text class="rt-m" x="1170" y="256" font-size="12" text-anchor="middle">a lead hands tasks to subagents</text></g><g class="rc-pt p5" style="animation-delay:4.32s"><text class="rt-a" x="1170" y="170" font-size="15" font-weight="700" text-anchor="middle">Evaluator-optimizer</text><rect class="rf-s rs-i" x="1066" y="192" width="76" height="24" rx="5" stroke-width="1.3"/><text class="rt-i" x="1104" y="207.9" font-size="11" text-anchor="middle">write</text><rect class="rf-as rs-a" x="1198" y="192" width="76" height="24" rx="5" stroke-width="1.3"/><text class="rt-i" x="1236" y="207.9" font-size="11" text-anchor="middle">check</text><path class="rc-flow rf-n rs-a" d="M1144 198 C1162 184 1180 184 1196 198" stroke-width="1.6" marker-end="url(#rcB)"/><path class="rc-flow rf-n rs-a" d="M1196 212 C1180 226 1162 226 1144 212" stroke-width="1.6" marker-end="url(#rcB)"/><text class="mono rt-m" x="1170" y="236" font-size="10" text-anchor="middle">feedback</text><text class="rt-m" x="1170" y="256" font-size="12" text-anchor="middle">write, check, revise until good</text></g><text class="rc-pl p1" style="animation-delay:0.00s" x="1042" y="282" font-size="12.5">1. Prompt chaining</text><text class="rc-pl p2" style="animation-delay:1.08s" x="1042" y="298" font-size="12.5">2. Routing</text><text class="rc-pl p3" style="animation-delay:2.16s" x="1042" y="314" font-size="12.5">3. Parallelization</text><text class="rc-pl p4" style="animation-delay:3.24s" x="1042" y="330" font-size="12.5">4. Orchestrator-workers</text><text class="rc-pl p5" style="animation-delay:4.32s" x="1042" y="346" font-size="12.5">5. Evaluator-optimizer</text><text class="rt-m" x="1170" y="370" font-size="13.5" text-anchor="middle">Several calls or subagents,</text><text class="rt-m" x="1170" y="389" font-size="13.5" text-anchor="middle">arranged in a pattern</text></g>
+<g class="rc-grp g-a"><rect class="rc-card" x="1336" y="100" width="104" height="300" rx="14"/><circle class="rf-g" cx="1388" cy="226" r="26"/><path d="M1376 226 L1385 235 L1401 217" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><text class="rt-i" x="1388" y="286" font-size="17" font-weight="700" text-anchor="middle">Answer</text><text class="rt-m" x="1388" y="306" font-size="12.5" text-anchor="middle">with sources</text></g>
+</svg>`;
+const recap=(()=>{
+  const el=document.getElementById("recap"), btn=document.getElementById("recapBtn");
+  if(!el||!btn) return null;
+  let at=0, sub=0, subT=null, timer=null, playing=true, built=false, vb=null, raf=0, lastFocus=null;
+  const phone=matchMedia("(max-width:700px)"), still=matchMedia("(prefers-reduced-motion: reduce)");
+  const say=document.getElementById("rcSay"), playB=document.getElementById("rcPlay"), dots=document.getElementById("rcDots");
+  function build(){
+    document.getElementById("rcStage").innerHTML=RC_SVG;
+    dots.innerHTML=RC_STEPS.map((s,i)=>`<button type="button" aria-label="Step ${i+1} of ${RC_STEPS.length}" data-i="${i}"></button>`).join("");
+    dots.querySelectorAll("button").forEach(b=>b.onclick=()=>{show(+b.dataset.i); if(playing) schedule();});
+    built=true;
+  }
+  function aim(i){
+    const svg=document.getElementById("rcSvg"); if(!svg) return;
+    let target=[0,52,1440,388];
+    if(phone.matches){const [x,w]=RC_STEPS[i].box, vw=Math.max(w+48,300); target=[Math.max(0,Math.min(1440-vw,x+w/2-vw/2)),52,vw,380];}
+    cancelAnimationFrame(raf);
+    const from=vb||target, t0=performance.now(), dur=(still.matches||!vb)?0:450;
+    const stepF=now=>{const k=dur?Math.min(1,(now-t0)/dur):1, e=1-Math.pow(1-k,3); vb=from.map((v,j)=>v+(target[j]-v)*e); svg.setAttribute("viewBox",vb.join(" ")); if(k<1) raf=requestAnimationFrame(stepF);};
+    raf=requestAnimationFrame(stepF);
+  }
+  function show(i){
+    at=(i+RC_STEPS.length)%RC_STEPS.length; const s=RC_STEPS[at];
+    el.removeAttribute("data-step"); void el.offsetWidth; el.setAttribute("data-step",s.k);
+    say.textContent=s.say;
+    dots.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",j===at?"step":"false"));
+    sub=0; clearInterval(subT); aim(at);
+    if(s.band&&phone.matches) subT=setInterval(()=>{sub++; if(sub>4){clearInterval(subT);} else aim(at);}, still.matches?1e9:Math.round(s.ms/5));
+  }
+  function schedule(){clearTimeout(timer); timer=setTimeout(()=>{show(at+1); schedule();},RC_STEPS[at].ms);}
+  function setPlay(p){playing=p; playB.textContent=p?"Pause":"Play"; if(p) schedule(); else clearTimeout(timer);}
+  function open(){
+    if(!built) build(); lastFocus=document.activeElement; vb=null;
+    if(typeof setMenu==="function"&&document.body.classList.contains("menu-open")) setMenu(false);
+    el.hidden=false; document.body.classList.add("recap-open");
+    show(0); setPlay(!still.matches);
+    document.getElementById("rcClose").focus();
+  }
+  function close(){
+    clearTimeout(timer); clearInterval(subT); cancelAnimationFrame(raf); el.hidden=true; document.body.classList.remove("recap-open");
+    if(lastFocus&&lastFocus.focus) lastFocus.focus();
+  }
+  btn.addEventListener("click",open);
+  document.getElementById("rcClose").addEventListener("click",close);
+  document.getElementById("rcPrev").addEventListener("click",()=>{show(at-1); if(playing) schedule();});
+  document.getElementById("rcNext").addEventListener("click",()=>{show(at+1); if(playing) schedule();});
+  playB.addEventListener("click",()=>setPlay(!playing));
+  document.addEventListener("keydown",e=>{
+    if(el.hidden) return;
+    if(e.key==="Escape"){e.preventDefault(); close();}
+    else if(e.key==="ArrowRight"){e.preventDefault(); e.stopImmediatePropagation(); show(at+1); if(playing) schedule();}
+    else if(e.key==="ArrowLeft"){e.preventDefault(); e.stopImmediatePropagation(); show(at-1); if(playing) schedule();}
+    else if(e.key==="Tab"){const f=[...el.querySelectorAll("button")].filter(b=>b.offsetParent); const i=f.indexOf(document.activeElement); if(e.shiftKey&&i<=0){e.preventDefault(); f[f.length-1].focus();} else if(!e.shiftKey&&i===f.length-1){e.preventDefault(); f[0].focus();}}
+  },true);
+  phone.addEventListener("change",()=>{ if(!el.hidden){vb=null; aim(at);} });
+  return {open,close};
+})();
+
 function setMenu(open){
   const b=document.getElementById("menuBtn"); if(!b) return;
   document.documentElement.style.setProperty("--hdr", document.querySelector("header.top").getBoundingClientRect().bottom+"px");
