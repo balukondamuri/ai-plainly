@@ -4,7 +4,7 @@
 
 AI, Plainly is a free, self-paced course that teaches how modern AI systems work using situations you already know. The default analogy is a restaurant kitchen. Prompts are order tickets, RAG is a recipe book, agents are chefs, and hooks are the kitchen inspector. You can switch to a different everyday analogy, or pick "Technical" to learn with no analogy at all.
 
-👉 **Live site:** `https://<your-username>.github.io/<repo-name>/`
+👉 **Live site:** `https://balukondamuri.github.io/ai-plainly`
 
 ---
 
